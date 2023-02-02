@@ -1,8 +1,6 @@
 const express = require("express");
-const multer = require("multer");
 
 const router = express.Router();
-const upload = multer({ dest: process.env.AVATAR_DIRECTORY });
 
 // services d'auth
 const {
@@ -12,40 +10,29 @@ const {
 } = require("./services/auth");
 
 const authControllers = require("./controllers/authControllers");
-const articleControllers = require("./controllers/articleControllers");
+const productControllers = require("./controllers/productControllers");
 const userControllers = require("./controllers/userControllers");
-const fileControllers = require("./controllers/fileControllers");
 
 // Auth
-router.post("/api/register", hashPassword, userControllers.add);
+router.post("/register", hashPassword, userControllers.add);
 router.post(
-  "/api/login",
+  "/login",
   authControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
 
-// Gestion des articles
-router.get("/api/articles", verifyToken, articleControllers.browse);
-router.get("/api/articles/:id", articleControllers.read);
-router.post("/api/articles", verifyToken, articleControllers.add);
-router.put("/api/articles/:id", verifyToken, articleControllers.edit);
-router.delete("/api/articles/:id", verifyToken, articleControllers.destroy);
+// Gestion des products
+router.get("/api/products", productControllers.browse);
+router.get("/api/products/:id", productControllers.read);
+router.post("/api/products", productControllers.add);
+router.put("/api/products/:id", productControllers.edit);
+router.delete("/api/products/:id", productControllers.destroy);
 
 // Gestion des users
-router.get("/api/users", userControllers.browse);
-router.get("/api/users/:id", userControllers.read);
-router.post("/api/users", hashPassword, verifyToken, userControllers.add);
-router.put("/api/users/:id", hashPassword, verifyToken, userControllers.edit);
-router.delete("/api/users/:id", verifyToken, userControllers.destroy);
-
-// Gestion des avatars
-router.post(
-  "/api/avatars",
-  verifyToken,
-  upload.single("avatar"),
-  fileControllers.renameAvatar,
-  userControllers.updateAvatar
-);
-router.get("/api/avatars/:fileName", fileControllers.sendAvatar);
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.post("/users", hashPassword, userControllers.add);
+router.put("/users/:id", hashPassword, verifyToken, userControllers.edit);
+router.delete("/users/:id", verifyToken, userControllers.destroy);
 
 module.exports = router;

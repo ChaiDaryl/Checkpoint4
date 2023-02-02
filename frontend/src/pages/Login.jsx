@@ -28,7 +28,7 @@ function Login() {
 
     if (email && password) {
       // on appelle le back
-      fetch("http://localhost:5000/api/login", requestOptions)
+      fetch("http://localhost:5000/login", requestOptions)
         .then((response) => response.json())
         .then((result) => {
           setUser(result.user);
@@ -42,11 +42,11 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="mt-[35vh] ">
       <form
         onSubmit={handleSubmit}
         style={{ width: "18rem" }}
-        className="m-auto mt-5"
+        className="border p-3 rounded-[0.75rem] m-auto mt-5 bg-main"
       >
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -70,12 +70,12 @@ function Login() {
             id="password"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn border bg-white focus:bg-main">
           Connexion
         </button>
       </form>
       <div>{errorMessage}</div>
-    </>
+    </div>
   );
 }
 

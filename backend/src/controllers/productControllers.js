@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.article
+  models.product
     .findAll()
     .then(([results]) => {
       res.send(results);
@@ -15,7 +15,7 @@ const browse = (req, res) => {
 const read = (req, res) => {
   const { id } = req.params;
 
-  models.article
+  models.product
     .find(id)
     .then(([results]) => {
       if (results[0]) res.send(results[0]);
@@ -28,13 +28,12 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const article = req.body;
-  article.user_id = req.payloads.sub;
+  const product = req.body;
 
-  models.article
-    .insert(article)
+  models.product
+    .insert(product)
     .then(([result]) => {
-      res.location(`/api/articles/${result.insertId}`).sendStatus(201);
+      res.location(`/api/products/${result.insertId}`).sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
@@ -43,11 +42,11 @@ const add = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const article = req.body;
-  article.id = req.params.id;
+  const product = req.body;
+  product.id = req.params.id;
 
-  models.article
-    .update(article)
+  models.product
+    .update(product)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
       else res.sendStatus(204);
@@ -60,7 +59,7 @@ const edit = (req, res) => {
 
 const destroy = (req, res) => {
   const { id } = req.params;
-  models.article
+  models.product
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);

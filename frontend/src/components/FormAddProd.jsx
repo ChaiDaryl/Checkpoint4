@@ -1,38 +1,33 @@
+/* eslint-disable camelcase */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function SignUp() {
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
+function FormAddProd() {
+  const [imp_url, setImp_Url] = useState("");
+  const [prodname, setProdname] = useState("");
+  const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState();
 
   const handleForm = (e) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify({
-      email,
-      firstname,
-      lastname,
-
-      password,
+      imp_url,
+      prodname,
+      price,
+      quantity,
     });
 
     const requestOptions = {
-      method: "POST",
+      method: "put",
       headers: myHeaders,
       body,
     };
     e.preventDefault();
     // on créé et on redirige
-    fetch("http://localhost:5000/register", requestOptions)
-      .then(() => {
-        navigate("/login");
-      })
-      .catch(console.error);
+    fetch("http://localhost:5000/api/products", requestOptions).catch(
+      console.error
+    );
   };
 
   return (
@@ -44,54 +39,54 @@ function SignUp() {
       >
         <div className="mb-3">
           <label htmlFor="firstname" className="form-label">
-            First Name
+            URL de l'image
           </label>
           <input
-            onChange={(e) => setFirstname(e.target.value)}
-            type="firstname"
+            onChange={(e) => setImp_Url(e.target.value)}
+            type="url"
             className="form-control"
-            id="firstname"
+            id="url"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="lastname" className="form-label">
-            Lastname
+          <label htmlFor="name" className="form-label">
+            Nom du produit
           </label>
           <input
-            onChange={(e) => setLastname(e.target.value)}
-            type="lastname"
+            onChange={(e) => setProdname(e.target.value)}
+            type="name"
             className="form-control"
             id="lastname"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
+          <label htmlFor="prix" className="form-label">
+            Prix en €
           </label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
+            onChange={(e) => setPrice(e.target.value)}
+            type="prix"
             className="form-control"
-            id="email"
+            id="prix"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
+          <label htmlFor="quantité" className="form-label">
+            la quantité
           </label>
           <input
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
+            onChange={(e) => setQuantity(e.target.value)}
+            type="text"
             className="form-control"
-            id="password"
+            id="quantité"
           />
         </div>
         <button type="submit" className="btn border bg-white focus:bg-main">
-          Inscription
+          Ajouté
         </button>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default FormAddProd;
