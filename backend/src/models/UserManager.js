@@ -21,21 +21,14 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.connection.query(
-      `select id, firstname, lastname, email, city, language, avatar from  ${this.table}`
+      `select id, firstname, lastname, email from  ${this.table}`
     );
   }
 
   insert(user) {
     return this.connection.query(
-      `insert into ${this.table} (firstname, lastname, email, city, language, hashedPassword) values (?, ?, ?, ?, ?, ?)`,
-      [
-        user.firstname,
-        user.lastname,
-        user.email,
-        user.city,
-        user.language,
-        user.hashedPassword,
-      ]
+      `insert into ${this.table} (firstname, lastname, email, hashedPassword) values (?, ?, ?, ?)`,
+      [user.firstname, user.lastname, user.email, user.hashedPassword]
     );
   }
 

@@ -1,78 +1,84 @@
-/* On desactive la verification des clés étrangères*/
-SET foreign_key_checks = 0;
+
 
 DROP TABLE IF EXISTS user;
-CREATE TABLE user (
-    id int primary key NOT NULL AUTO_INCREMENT,
-    firstname varchar(255) NOT NULL,
-    lastname varchar(255) NOT NULL,
-    email varchar(255) UNIQUE NOT NULL,
-    city varchar(255) DEFAULT NULL,
-    language varchar(255) DEFAULT NULL,
-    hashedPassword varchar(255) NOT NULL,
-    avatar varchar(255) DEFAULT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE user
+(
+  id INT PRIMARY KEY NOT NULL
+  AUTO_INCREMENT,
+    firstname varchar
+  (255) NOT NULL,
+    lastname varchar
+  (255) NOT NULL,
+    email varchar
+  (255) UNIQUE NOT NULL,     
+    hashedPassword varchar
+  (255) NOT NULL,
+  is_admin TINYINT NULL DEFAULT '0'   
+);
 
-INSERT INTO
-  user (firstname, lastname, email, city, language, hashedPassword)
-VALUES
+
+  DROP TABLE IF EXISTS product;
+  CREATE TABLE product
   (
-    'John',
-    'Doe',
-    'john.doe@example.com',
-    'Paris',
-    'English',
-    "$argon2id$v=19$m=16,t=2,p=1$emVmZXpmemZlemVmZWR6ZXplZg$rqZkhxu5YbqCGHPNrjJZpQ"
-  ),(
-    'Valeriy',
-    'Appius',
-    'valeriy.ppius@example.com',
-    'Moscow',
-    'Russian',
-    '$argon2id$v=19$m=16,t=2,p=1$emVmemVmemZlemZ6ZnpmZQ$eSetR6KPUNAGW+q+wDadcw'
-  ),(
-    'Ralf',
-    'Geronimo',
-    'ralf.geronimo@example.com',
-    'New York',
-    'Italian',
-    '$argon2id$v=19$m=16,t=2,p=1$emVmemVmemZlemZ6ZnpmZXphZGF6ZGQ$a0bg5DZB6H6v3jjQC81DXg'
-  ),(
-    'Maria',
-    'Iskandar',
-    'maria.iskandar@example.com',
-    'New York',
-    'German',
-    '$argon2id$v=19$m=16,t=2,p=1$emVmemVmemZlenplZHpkZnpmemZlemFkYXpkZA$V1qAnJDyMuuWG7g9yoGYXA'
-  ),(
-    'Jane',
-    'Doe',
-    'jane.doe@example.com',
-    'London',
-    'English',
-    '$argon2id$v=19$m=16,t=2,p=1$emVmemVmemZlenplZHpkZGZ6ZnpmZXphZGF6ZGQ$VCzq45PL9t8khtc44Kk5iw'
-  ),(
-    'Johanna',
-    'Martino',
-    'johanna.martino@example.com',
-    'Milan',
-    'Spanish',
-    '$argon2id$v=19$m=16,t=2,p=1$emVmemVmemVmemZlenplZHpkZGZ6ZnpmZXphZGF6ZGQ$UKaGZ9hGFn/S5SBQDMe/Uw'
-  );
+    id INT PRIMARY KEY NOT NULL
+    AUTO_INCREMENT,
+    imp_url varchar
+    (255) NOT NULL,
+  prodname varchar
+    (255) NOT NULL,
+  price DECIMAL
+    (20,2) NULL DEFAULT NULL,
+  quantity int
+    (0) NULL DEFAULT NULL,
+  prod_type TINYINT
+    (0) NULL
+    
+);
 
 
-DROP TABLE IF EXISTS article;
-CREATE TABLE article (
-  id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  title varchar(255) NOT NULL,
-  content varchar(255) NOT NULL,
-  user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    DROP TABLE IF EXISTS business;
+    CREATE TABLE business
+    (
+      id INT PRIMARY KEY NOT NULL
+      AUTO_INCREMENT,
+  busname varchar
+      (255) NOT NULL,
+  prodmake varchar
+      (255) NOT NULL,
+  recap varchar
+      (255) NOT NULL
+  
+);
 
-INSERT INTO article (title, content, user_id) VALUES ('Article 1', "Mon super contenu !!", 1),
-('Article 2', "Mon autre super contenu", 2);
+      INSERT INTO product
+
+        (id, imp_url, prodname, price, quantity, prod_type)
+      VALUES
+        (1, "https://free-png.gisoft.ca/img2/food/pomme-de-terre.png", "Pomme-de-Terre", 0.75, 125, 1),
+        (2, "https://free-png.gisoft.ca/img2/food/poivron-pourpre-1.png", "Poivron-pourpre", 1.25, 123, 1),
+        (3, "https://free-png.gisoft.ca/img2/food/piment-chili.png", "piment-chili", 1.75, 58, 1),
+        (4, "https://free-png.gisoft.ca/img2/food/fenouil.png", "fenouil", 0.99, 100, 1),
+        (6, "https://free-png.gisoft.ca/img2/food/tomate-rouge-2.png", "Tomate-rouge", 1.25, 225, 1),
+        (7, "https://free-png.gisoft.ca/img2/food/echalottes.png", "Echalottes", 0.65, 175, 1),
+        (8, "https://free-png.gisoft.ca/img2/food/chou-fleur-jaune.png", "Chou-fleur", 1.55, 75, 1),
+        (9, "https://free-png.gisoft.ca/img2/food/chou-fleur-vert.png", "Chou-fleur-vert", 1.45, 215, 1),
+        (10, "https://free-png.gisoft.ca/img2/food/chou.png", "Chou", 0.45, 175, 1),
+        (11, "https://free-png.gisoft.ca/img2/food/celeri.png", "Celeri", 1.45, 115, 1),
+        (12, "https://free-png.gisoft.ca/img2/food/asperges.png", "Asperges", 0.65, 210, 1),
+        (13, "https://free-png.gisoft.ca/img2/food/artichaut.png", "Artichaut", 0.65, 210, 1);
 
 
-/* On reactive la verification des clés étrangères*/
-SET foreign_key_checks = 1;
+      INSERT INTO user
+        (id, firstname, lastname, email, hashedPassword, is_admin)
+      VALUES
+        (1, "User", "Lambda", "qsdf@rty.iu", "$argon2id$v=19$m=65536,t=5,p=1$/+nDdfBWsOCGqFC0AjKgxA$Tdt+u0nH96TSCbtkz12XjO8ocovLsZOfLO7jxkIIiqY", 0),
+        (2, "utilisateur", "banale", "blabla@bla.bl", "$argon2id$v=19$m=65536,t=5,p=1$28l58K/i0xYaUDn+jMbdvg$lR+BL3hp+zloP/LkyksHxWXx6W+7L4n/L3UQC/5eBp8", 0),
+        (3, "admin", "banale", "bloubkou@blou.blou", "$argon2id$v=19$m=65536,t=5,p=1$jdwri40d28aCOtCxtuMRbg$SnFpRKpRcynOjQ+alrw+caFVe4ml7b/yMkKhtpoqK2E", 1);
+
+
+      INSERT INTO business
+        (id, busname, prodmake, recap)
+      VALUES
+        (1, "Patate en folie", "Pomme de terre", "Pomme de terre,Pomme de terre, Patate" ),
+        (2, "Le Choux c'est chou", "Choux", "chouchoute ton choux !" ),
+        (3, "Les Artichaut archi chaud", "Artichaut", "blabla bla bla !" );
