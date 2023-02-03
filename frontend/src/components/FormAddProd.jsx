@@ -19,7 +19,7 @@ function FormAddProd() {
     });
 
     const requestOptions = {
-      method: "put",
+      method: "post",
       headers: myHeaders,
       body,
     };

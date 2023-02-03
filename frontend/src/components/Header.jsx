@@ -22,7 +22,7 @@ function Header() {
           navigate("/");
         }}
       >
-        Acceuil
+        Accueil
       </button>
       <button
         type="button"

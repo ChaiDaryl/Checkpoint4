@@ -8,7 +8,7 @@ function Article({ product }) {
     <div className="flex flex-col flex-nowrap m-8 border justify-center rounded-[2rem] border-black w-[10rem] h-[16.7rem] p-4">
       <div>
         <div className="flex justify-center">
-          <div className="flex justify-center mb-2">{product.prodname}</div>
+          <div className="flex justify-center">{product.prodname}</div>
           <Link to={`/products/${product.id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
