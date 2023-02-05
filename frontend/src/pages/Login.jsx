@@ -1,3 +1,4 @@
+import Header from "@components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
@@ -42,40 +43,45 @@ function Login() {
   };
 
   return (
-    <div className="mt-[35vh] ">
-      <form
-        onSubmit={handleSubmit}
-        style={{ width: "18rem" }}
-        className="border p-3 rounded-[0.75rem] m-auto mt-5 bg-main"
-      >
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            className="form-control"
-            id="email"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            className="form-control"
-            id="password"
-          />
-        </div>
-        <button type="submit" className="btn border bg-white focus:bg-main">
-          Connexion
-        </button>
-      </form>
-      <div>{errorMessage}</div>
-    </div>
+    <>
+      <div>
+        <Header />
+      </div>
+      <div className="mt-[35vh] ">
+        <form
+          onSubmit={handleSubmit}
+          style={{ width: "18rem" }}
+          className="border p-3 rounded-[0.75rem] m-auto mt-5 bg-main"
+        >
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              className="form-control"
+              id="email"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              className="form-control"
+              id="password"
+            />
+          </div>
+          <button type="submit" className="btn border bg-white focus:bg-main">
+            Connexion
+          </button>
+        </form>
+        <div>{errorMessage}</div>
+      </div>
+    </>
   );
 }
 

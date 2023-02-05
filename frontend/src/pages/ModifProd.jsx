@@ -1,11 +1,17 @@
+import Header from "@components/Header";
 import React from "react";
 import FormModifProd from "../components/ModifProduct";
 
 function ModifProd() {
   return (
-    <div>
-      <FormModifProd />
-    </div>
+    <>
+      <div>
+        <Header />
+      </div>
+      <div>
+        <FormModifProd />
+      </div>
+    </>
   );
 }
 

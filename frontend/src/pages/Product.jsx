@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
+import Header from "@components/Header";
 
 import Article from "../components/Article";
 
@@ -27,6 +28,7 @@ function Products() {
 
   return (
     <div className="relative">
+      <Header />
       <h1 className="text-center my-3">Nos Produits</h1>
       <button
         className="absolute flex items-center justify-center border border-blue-800 rounded-full bg-blue-800  text-white right-7 h-6 w-6"
@@ -37,7 +39,8 @@ function Products() {
       >
         +
       </button>
-      <div className="flex flex-wrap">
+
+      <div className="flex flex-wrap justify-center">
         {products.map((product) => (
           <Article key={product.id} product={product} />
         ))}
