@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Article({ product }) {
   return (
-    <div className="flex flex-col flex-nowrap m-8 border justify-center rounded-[2rem] border-black w-[10rem] h-[16.7rem] p-4">
+    <div className="flex flex-col flex-nowrap m-8 border justify-center rounded-[2rem] border-black w-[15rem] h-[19rem] p-4">
       <div>
         <div className="flex justify-center">
           <div className="flex justify-center">{product.prodname}</div>
